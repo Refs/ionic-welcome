@@ -30,6 +30,8 @@ plugins/ios.json
 www/
 $RECYCLE.BIN/
 
+*/gradle-4.1-all.zip
+
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
