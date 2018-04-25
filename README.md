@@ -4,7 +4,8 @@
 
 ## Course 2 User Authentication Login and Signup
 
->  关键之处有两点： 
+
+>  关键之处逻辑： 
 
 * 用户登陆成功后，从服务器返回的数据，整个APP内部都要去使用，而这部分数据，存到哪里？ 因为当前的组件尤其特有的生命周期，一旦组件销毁，这部分数据也会被销毁； 一般数据是放到 LocalStorage 中
 
@@ -13,6 +14,53 @@
 * 当LocalStorage 还在 时候，我们打开应用 直接会蹦到tabs 页面，就像我们平时打开支付宝的时候一样；
 
 * 当我们去向服务器发送请求的时候，若token 还在有效期内，我们就可以正常去请求数据，否则若服务器返回token 过期，我们会将localStorage 清理掉，并将用户导向到登陆也 让其重新进行登陆； 这就是重新登陆 的逻辑； Since we are using token based authentication, `it protects if any unauthorized request is made and notices for a new login if required.`
+
+## 使用provider 需要注意的地方
+
+* 使用http 服务 要在app.module.ts中引入 HttpModule 并添加在 imports 配置数组中；
+
+* 使用新建的provider 需要在 在app.module.ts的 provides 容器中 生命，这样就可以在其它组件中去注入
+
+* 学会使用新的书写方式 promise工厂方式：
+
+```js
+
+// 新的使用方式：等于在外面 新套了一层函数，用来生成promise 
+postData(credentials, type) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + type, JSON.stringify(credentials), {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+```
+
+```js
+// 以往的使用方式，
+  getUsers(): Observable<[User]> {
+     return this.http.get(this.usersUrl)
+      .map(
+        res => res.json().data
+      )
+      .map(
+        users => {
+          return users.map(
+            this.toUser
+          );
+        }
+      )
+      .catch( this.handleError );
+
+  }
+
+```
+
+
 
 
 ### angular form component  vs ionic form
