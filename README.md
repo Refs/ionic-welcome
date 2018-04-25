@@ -12,6 +12,9 @@
 
 * 当LocalStorage 还在 时候，我们打开应用 直接会蹦到tabs 页面，就像我们平时打开支付宝的时候一样；
 
+* 当我们去向服务器发送请求的时候，若token 还在有效期内，我们就可以正常去请求数据，否则若服务器返回token 过期，我们会将localStorage 清理掉，并将用户导向到登陆也 让其重新进行登陆； 这就是重新登陆 的逻辑； Since we are using token based authentication, `it protects if any unauthorized request is made and notices for a new login if required.`
+
+
 ### angular form component  vs ionic form
 
 > once the signup process successfully, we are redirectiong to the home page . but the response data we are going to use in the applications every page , so that's why I'm going to store this somewhere , because we need to carry this thing from different pages
