@@ -1,0 +1,15 @@
+page-welcome {
+  #welcome {
+    background-color: color($colors, energy);
+
+    h1 {
+      font-size: 30px;
+      margin-top: 30px;
+    }
+    .logo {
+      height: 70px;
+      margin-left: 8px;
+    }
+
+  }
+}

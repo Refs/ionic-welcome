@@ -1,3 +1,18 @@
 page-about {
+   // 看生成后的 css 就可以知道， navbar 的背景并非是加在 ion-navbar 标签下面的，而是加在便签下面生成的div 标签上面的，div的类为toolbar-background
+   .header-bar  .toolbar-background{
+    background-color: color($colors, primary)
+  }
+  .header-logo {
+    height: 40px;
+  }
+
+  // 颜色修改的方式 与上面同理 ， 最好是在theme.sass 中统一修改
+  .header-title {
+    margin-top: 14px;
+    .toolbar-title  {
+      color: white;
+    }
+  }
 
 }
