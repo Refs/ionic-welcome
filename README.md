@@ -15,7 +15,7 @@
 
 * 当我们去向服务器发送请求的时候，若token 还在有效期内，我们就可以正常去请求数据，否则若服务器返回token 过期，我们会将localStorage 清理掉，并将用户导向到登陆也 让其重新进行登陆； 这就是重新登陆 的逻辑； Since we are using token based authentication, `it protects if any unauthorized request is made and notices for a new login if required.`
 
-## 使用provider 需要注意的地方
+### 使用provider 需要注意的地方
 
 * 使用http 服务 要在app.module.ts中引入 HttpModule 并添加在 imports 配置数组中；
 
@@ -126,6 +126,45 @@ export class Welcome {
 > 上述的几个逻辑 都是基于 localStorage 的
 
 
+```js
+let withRefresh = false;
+let packages$: Observable<NpmPackageInfo[]>;
+private searchText$ = new Subject<string>();
 
+// 用户点击的时候，考虑到用户可能重复点击多次，造成添加几次重复的请求，这个时候想用Rxjs的debounceTime，switchMap来过滤 请求，只保留用户一次操作。
+
+
+// Emits a value from the source Observable only after a particular span has passed without another source emission
+
+
+// This a rate-limiting operator, because 
+
+// Return an Observable that emits all items emitted by the source Observable that are distinct by comparision from the previous item.
+
+public switchMap( project: function(value: T, ?index:number):ObservableInput, resultSelector: function(outerValue:T, innerValue:I, outerIndex: number, innerIndex: number):any ): Observable
+
+switchMap(packageName =>
+      this.searchService.search(packageName, this.withRefresh))
+
+
+```
+
+### ionic storage
+
+> video : https://www.youtube.com/watch?v=E0aTpYTFhDk
+
+when we're working and mobile applications generally we either are going to be storing data in the browser's local storage or we'll use a native SQLite database so there's a few different flavous of localstorage stuff that's stored in the browser itself but the problem with that is that it isn't necessarily stable and it has a memory limit, so browser storage is limited to five megabytes, and It can be cleaned up by operating system . so if the operating system is trying to free up some space on a device it might just wipe that storage completely . so if you're storing data in your application that you want to be there permanently at any time  we should use SQLite database.
+
+SQLite database on the other hand is a native database , so it's outside of the browser. This means when the operating system is trying to clean up some memory and other stuff , it will delete the browser's localStorage which it sees as junk(废弃物) . the operating system is not going to deleted thing which is in a native database . 
+
+But since SQLite database is a native database , it will be not available in the browser and so instead you need to use a plugin to access that which we can do . 
+
+So the whole point of the storage service that ionic provides is that it's just going to automatically use the best storage that is available so if we running our application without that SQLite plugin installed , it's going to fall back to browser-based storage . If we do have the SQLite plugin installed and we have access to that native database , then it is going to use that instead .
+
+so nomatter how your application set up we can just use the union and simple API , which hava set | get | clear method and so on . 
+
+if We want to use the SQLite database , just make sure the related cordova plugin has been installed.
+
+> 其它的内容，看一下官方文档就可以了；
 
 
