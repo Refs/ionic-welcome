@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+
+
 
 
 /**
@@ -17,7 +20,7 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -25,6 +28,16 @@ export class LoginPage {
   }
 
   login () {
-    this.navCtrl.push(TabsPage);
+    this.authService.userLogin()
+        .subscribe(
+          (data) => {
+            console.log(data);
+          },
+          (error) => {
+              console.log(error);
+          }
+        )
+
+    // this.navCtrl.push(TabsPage);
   }
 }

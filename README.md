@@ -168,3 +168,9 @@ if We want to use the SQLite database , just make sure the related cordova plugi
 > 其它的内容，看一下官方文档就可以了；
 
 
+### rxjs update
+
+https://stackoverflow.com/questions/45464852/rxjs-observable-throw-is-not-a-function-angular4
+
+
+
