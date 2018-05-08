@@ -34,14 +34,14 @@ export class AuthServiceProvider {
 
 
 
-  userLogin(  ): Observable<userData> {
+  userLogin( ): Observable<userData> {
 
     return this.http.post<responseUserData>(
         this.apiUrl+'login',
         // 此处涉及到json转化的问题；
         {
           "email": "lhx1010339808@outlook.com",
-          "password": "lhx58350"
+          "password": "lhx583508"
         },{
           headers: {
             "Content-Type": "application/json"

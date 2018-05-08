@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { FormControl, FormGroup, Validator, FormBuilder, Validators } from '@angular/forms';
+
 
 
 
@@ -20,11 +22,31 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthServiceProvider) {
+  form:FormGroup;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public authService: AuthServiceProvider,
+    private fb: FormBuilder) {
+      this.buildForm();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    // console.log('ionViewDidLoad LoginPage');
+
+  }
+
+
+  buildForm() {
+    this.form = this.fb.group({
+      email: ['',[Validators.required]],
+      password: ['', [Validators.required]]
+    })
+  }
+
+  processForm() {
+    console.log('processing', this.form);
   }
 
   login () {
@@ -37,7 +59,6 @@ export class LoginPage {
               console.log(error);
           }
         )
-
     // this.navCtrl.push(TabsPage);
   }
 }

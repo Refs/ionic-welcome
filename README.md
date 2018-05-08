@@ -173,4 +173,41 @@ if We want to use the SQLite database , just make sure the related cordova plugi
 https://stackoverflow.com/questions/45464852/rxjs-observable-throw-is-not-a-function-angular4
 
 
+```flow
+st=>start: Start:>http://www.google.com[blank]
+e=>end:>http://www.google.com
+op1=>operation: My Operation
+sub1=>subroutine: My Subroutine
+cond=>condition: Yes
+or No?:>http://www.google.com
+io=>inputoutput: catch something...
+para=>parallel: parallel tasks
+
+st->op1->cond
+cond(yes)->io->e
+cond(no)->para
+para(path1, bottom)->sub1(right)->op1
+para(path2, top)->op1
+
+```
+
+'''flow     
+st=>start: 开始
+e=>end: 结束
+op=>operation: 我的操作
+cond=>condition: 确认？
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+
+'''
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 

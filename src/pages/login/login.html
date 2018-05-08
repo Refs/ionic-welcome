@@ -13,21 +13,24 @@
 </ion-header>
 
 
-<ion-content  >
+<ion-content>
 
     <ion-list inset>
 
-        <ion-item>
+        <form [formGroup]="form" (ngSubmit)="processForm()">
+          <ion-item>
             <ion-icon name="leaf" item-start></ion-icon>
-           <ion-input type="text" placeholder= " email" ></ion-input>
-        </ion-item>
+             <ion-input type="text" placeholder= " email" formControlName="email" ></ion-input>
+          </ion-item>
 
-        <ion-item>
-            <ion-icon name="rose" item-start></ion-icon>
-            <ion-input type="password" placeholder="password" ></ion-input>
-        </ion-item>
+          <ion-item>
+              <ion-icon name="rose" item-start></ion-icon>
+              <ion-input type="password" placeholder="password" formControlName="password" ></ion-input>
+          </ion-item>
 
-        <button ion-button full color="primary" class="margin-top" (click)="login()" > Login </button>
+          <button ion-button full color="dark" type="submit">log form</button>
+          <button ion-button full color="primary" class="margin-top" (click)="login()" > Login </button>
+        </form>
 
 
     </ion-list>
