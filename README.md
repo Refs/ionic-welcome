@@ -192,6 +192,10 @@ https://stackoverflow.com/questions/45464852/rxjs-observable-throw-is-not-a-func
 .ng-untouched
 .ng-touched
 */
+.ng-invalid.ng-dirty,.ng-invalid.ng-touched {
+  color:  red;
+}
+
 .ng-valid[required], .ng-valid.required  {
   border-left: 5px solid #42A948; /* green */
 }
