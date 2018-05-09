@@ -21,6 +21,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { ValidatorServiceProvider } from '../providers/validator-service/validator-service';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider,
+    ValidatorServiceProvider,
   ]
 })
 export class AppModule {}

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { ValidatorServiceProvider } from '../../providers/validator-service/validator-service';
+
 import { FormControl, FormGroup, Validator, FormBuilder, Validators } from '@angular/forms';
 
 
@@ -28,6 +30,7 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public authService: AuthServiceProvider,
+    public validatorService: ValidatorServiceProvider,
     private fb: FormBuilder) {
       this.buildForm();
   }
