@@ -183,15 +183,7 @@ https://stackoverflow.com/questions/45464852/rxjs-observable-throw-is-not-a-func
 * 利用Control status CSS classes 去标记输入框 结合文档通过css 去控制；
 
 ```css
-/**
-*.ng-valid
-.ng-invalid
-.ng-pending
-.ng-pristine
-.ng-dirty
-.ng-untouched
-.ng-touched
-*/
+
 .ng-invalid.ng-dirty,.ng-invalid.ng-touched {
   color:  red;
 }
@@ -202,6 +194,70 @@ https://stackoverflow.com/questions/45464852/rxjs-observable-throw-is-not-a-func
 
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442; /* red */
+}
+
+```
+* 主要是利用类绑定去控制控件的类样式
+
+```html
+  <div ion-item >
+      <ion-icon name="leaf" item-start></ion-icon>
+      <ion-input  [class.nameInvalid]= 'emailControl.invalid&&emailControl.dirty' type="text" placeholder= " email" formControlName="email" ></ion-input>
+  </div>
+
+```
+```ts
+  get emailControl():FormControl {
+    return this.form.get('email') as FormControl;
+  }
+```
+
+> 但 这样做是行不通的 ionic 已经提供了默认的一套用于验证的样式：Ionic still uses an actual <input type="text"> HTML element within the component, however, with Ionic wrapping the native HTML input element it's better able to handle the user experience and interactivity.
+
+```css
+/* 针对验证 ionic 会提供默认的两种样式，但针对 渲染过的 <div class="item-inner"> </div>, 若我们想去修改其它元素的样式，我们可以去利用上述的class绑定，然后再去css文件中去修改 */ 
+
+/* 验证没有通过的时候 */
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    border-bottom:none;
+    -webkit-box-shadow: inset 0 -1px 0 0 red;
+    box-shadow: inset 0 -1px 0 0 red;
+}
+
+/* 验证通过的时候 */
+.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    border-bottom-color: #32db64;
+    -webkit-box-shadow: inset 0 -1px 0 0 #32db64;
+    box-shadow: inset 0 -1px 0 0 #32db64;
+}
+
+```
+
+
+* 利用 *ng-if 去控制dom元素的显示与隐藏； 类似体格tooltip 将元素固定到input的上方，利用*ngif 去控制显示与隐藏；
+
+> 实际上就类似与 jquery 中的增加元素与删除元素，只不过angular  有其自己的书写风格； 
+
+```html
+ <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" required
+            formControlName="username">
+        <div class='tip'>
+          <span class="help-block" *ngIf="formErrors.username">
+              {{ formErrors.username }}
+          </span>
+        </div>
+</div>
+
+```
+
+```css
+.tip {
+  position: absolute;
+  top: -30px;
+  left: 10px;
+  color: red;
 }
 
 ```
@@ -225,7 +281,30 @@ export class MyPage {
 }
 ```
 
-5. 学会去调试表单根据用户输入之后的反应
+5. 什么时候去验证？是在input 失去焦点  还是再input 的值改变的时候（用户正在输入的时候）
+> 答案肯定是在用户边输入，边验证，边提示；
+
+` get valueChanges: Observable<any> : Emits an event every time the value of the control changes, in the UI or programmatically.`
+
+```ts
+buildForm() {
+    // build our form
+    this.form = this.fb.group({
+      name: ['', [Validators.minLength(3), Validators.maxLength(6)]],
+      username: ['', Validators.minLength(3)],
+      addresses: this.fb.array([
+        this.createAddress()
+      ])
+    });
+
+    // watch for changes and validate
+    this.form.valueChanges.subscribe(data => this.validateForm());
+}
+
+```
+
+
+6. 学会去调试表单根据用户输入之后的反应
 
 ```html
 <p>Form value: {{ heroForm.value | json }}</p>

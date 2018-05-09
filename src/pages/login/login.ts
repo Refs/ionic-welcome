@@ -48,6 +48,10 @@ export class LoginPage {
     })
   }
 
+  get emailControl():FormControl {
+    return this.form.get('email') as FormControl;
+  }
+
   processForm() {
     console.log('processing', this.form);
   }

@@ -18,15 +18,16 @@
     <ion-list inset>
 
         <form [formGroup]="form" (ngSubmit)="processForm()">
-          <ion-item>
+          <div ion-item >
              <ion-icon name="leaf" item-start></ion-icon>
-             <ion-input type="text" placeholder= " email" formControlName="email" ></ion-input>
-          </ion-item>
+             <ion-input  [class.nameInvalid]= 'emailControl.invalid&&emailControl.dirty' type="text" placeholder= " email" formControlName="email" >
+             </ion-input>
+          </div>
 
-          <ion-item>
+          <div ion-item>
               <ion-icon name="rose" item-start></ion-icon>
               <ion-input type="password" placeholder="password" formControlName="password" ></ion-input>
-          </ion-item>
+          </div>
 
           <button ion-button full color="dark" type="submit">log form</button>
           <button ion-button full color="primary" class="margin-top" (click)="login()" > Login </button>
