@@ -7,11 +7,18 @@ page-login {
   }
 
 
+  /* 验证没有通过的时候 */
   .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
-    border-bottom-color:purple;
-    -webkit-box-shadow: inset 0 -1px 0 0 purple ;
-    box-shadow: inset 0 -1px 0 0 purple;
+      border-bottom-color: #dedede !important;
+      -webkit-box-shadow: inset 0 -1px 0 0 #dedede !important;
+      box-shadow: inset 0 -1px 0 0 #dedede !important;
   }
 
+  /* 验证通过的时候 */
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+      border-bottom-color: #dedede !important;
+      -webkit-box-shadow: inset 0 -1px 0 0 #dedede !important;
+      box-shadow: inset 0 -1px 0 0 #dedede !important;
+  }
 
 }

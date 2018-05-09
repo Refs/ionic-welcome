@@ -299,7 +299,7 @@ export class MyPage {
               <ion-input type="password" placeholder="password" formControlName="password" ></ion-input>
           </div>
 
-          <button ion-button full color="primary" class="margin-top" (click)="login()" > Login </button>
+          <button  ion-button full color="primary" class="margin-top" (click)="login()" > Login </button>
         </form>
 
         <div *ngIf='formErrors.email' ion-item>

@@ -33,14 +33,13 @@ export class LoginPage {
 
   validationMessages = {
     email : {
-      required: 'Email is required.',
+      required: '邮箱不能为空',
       email: '请输入正确的邮箱格式'
     },
     password: {
-      required: '请输入密码',
-      minLength: '密码至少六位',
-      minlength:'密码至少七位'
-
+      required: '密码不能为空',
+      // minLength: '密码至少六位', 注意返回的错误的key值是小写的 l 大写的l 识别不出来；
+      minlength:'密码至少六位'
     }
   }
 
