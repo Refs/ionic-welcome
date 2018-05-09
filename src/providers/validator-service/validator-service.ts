@@ -1,4 +1,4 @@
-import { ValidatorFn, AbstractControl, FormGroup, FormControl } from "@angular/forms";
+import { ValidatorFn, AbstractControl, FormGroup, FormControl, ValidationErrors } from "@angular/forms";
 import { Injectable } from '@angular/core';
 
 /*
@@ -24,7 +24,7 @@ export class ValidatorServiceProvider {
   forbiddenNameValidator(nameRe: RegExp) : ValidatorFn {
     return (control: AbstractControl): {[key:string]: any} => {
       const forbidden = nameRe.test(control.value);
-      // if pass validator, we'll return null, or {[key: string]:any}
+      // if pass validator, we'll return null, or {[key: string]:any} 即 ValidationErrors | null
       // the code below logic is 如果 禁止 成立，则就返回一个对象，用来说明校验不通过，否则禁止不成立，则校验通过；
       return forbidden ? {'forbiddenName': {value: control.value}} : null
     }
@@ -41,7 +41,7 @@ export class ValidatorServiceProvider {
    * @returns {ValidatorFn}
    */
   formatValidator(nameRe: RegExp): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any}=> {
+    return (control: AbstractControl): ValidationErrors | null=> {
       const wellFormat = nameRe.test(control.value);
       return wellFormat ? null : {'format': {value: control.value}};
     }
@@ -56,7 +56,7 @@ export class ValidatorServiceProvider {
    * @returns {ValidatorFn}
    */
   equalValidator(controlName1:string, controlName2: string): ValidatorFn {
-    return (formGroup: FormGroup) : {[key: string]:any} => {
+    return (formGroup: FormGroup) : ValidationErrors | null => {
       let formControl1 = formGroup.get(controlName1) as FormControl ;
       let formControl2 = <FormControl>formGroup.get(controlName2);
       const equal = formControl1.value == formControl2.value;
