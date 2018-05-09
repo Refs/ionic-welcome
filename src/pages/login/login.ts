@@ -24,7 +24,7 @@ import { FormControl, FormGroup, Validator, FormBuilder, Validators } from '@ang
 })
 export class LoginPage {
 
-  form:FormGroup;
+  form: FormGroup;
 
   constructor(
     public navCtrl: NavController,
@@ -33,10 +33,6 @@ export class LoginPage {
     public validatorService: ValidatorServiceProvider,
     private fb: FormBuilder) {
       this.buildForm();
-  }
-
-  ionViewDidLoad() {
-    // console.log('ionViewDidLoad LoginPage');
 
   }
 
@@ -46,11 +42,22 @@ export class LoginPage {
       email: ['',[Validators.required]],
       password: ['', [Validators.required]]
     })
+
+    this.form.valueChanges.subscribe(
+      (data) => {
+        console.log(data);
+        // this.validatorForm();
+      }
+    )
   }
 
-  get emailControl():FormControl {
-    return this.form.get('email') as FormControl;
+  validatorForm (){
+
   }
+
+  // get emailControl():FormControl {
+  //   return this.form.get('email') as FormControl;
+  // }
 
   processForm() {
     console.log('processing', this.form);
@@ -67,5 +74,10 @@ export class LoginPage {
           }
         )
     // this.navCtrl.push(TabsPage);
+  }
+
+  ionViewDidLoad() {
+    // console.log('ionViewDidLoad LoginPage');
+
   }
 }

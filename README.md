@@ -213,6 +213,7 @@ https://stackoverflow.com/questions/45464852/rxjs-observable-throw-is-not-a-func
 ```
 
 > 但 这样做是行不通的 ionic 已经提供了默认的一套用于验证的样式：Ionic still uses an actual <input type="text"> HTML element within the component, however, with Ionic wrapping the native HTML input element it's better able to handle the user experience and interactivity.
+> 即我们想设置自己的样式，首先要将其默认的样式给清理掉；
 
 ```css
 /* 针对验证 ionic 会提供默认的两种样式，但针对 渲染过的 <div class="item-inner"> </div>, 若我们想去修改其它元素的样式，我们可以去利用上述的class绑定，然后再去css文件中去修改 */ 
@@ -302,9 +303,58 @@ buildForm() {
 }
 
 ```
+* 对与手机 app也可以在点击登陆的时候，进行验证；
+
+6. 验证时针对整个表单进行验证，而不是去针对某一个formControl进行验证，这样省事高效
+
+```ts
+ validateForm() {
+    for (let field in this.formErrors) {
+      // clear that input field errors
+      this.formErrors[field] = '';
+
+      // grab an input field by name
+      let input = this.form.get(field);
+
+      if (input.invalid && input.dirty) {
+        // figure out the type of error
+        // loop over the formErrors field names
+        for (let error in input.errors) {
+          // assign that type of error message to a variable
+          this.formErrors[field] = this.validationMessages[field][error];
+        }
+      }
+    }
+}
+
+```
+
+```html
+
+<div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" required
+            formControlName="name">
+
+        <span class="help-block" *ngIf="formErrors.name">
+            {{ formErrors.name }}
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" required
+            formControlName="username">
+
+        <span class="help-block" *ngIf="formErrors.username">
+            {{ formErrors.username }}
+        </span>
+</div>
+
+```
 
 
-6. 学会去调试表单根据用户输入之后的反应
+7. 学会去调试表单根据用户输入之后的反应
 
 ```html
 <p>Form value: {{ heroForm.value | json }}</p>

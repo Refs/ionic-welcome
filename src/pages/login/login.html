@@ -20,7 +20,7 @@
         <form [formGroup]="form" (ngSubmit)="processForm()">
           <div ion-item >
              <ion-icon name="leaf" item-start></ion-icon>
-             <ion-input  [class.nameInvalid]= 'emailControl.invalid&&emailControl.dirty' type="text" placeholder= " email" formControlName="email" >
+             <ion-input  type="text" placeholder= " email" formControlName="email" >
              </ion-input>
           </div>
 
