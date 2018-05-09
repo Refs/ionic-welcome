@@ -175,9 +175,73 @@ https://stackoverflow.com/questions/45464852/rxjs-observable-throw-is-not-a-func
 
 ### 表单一般要处理三件事情
 
-* http 服务
-* validtor 服务
-* 错误信息 获取与提示 
+1. http 服务
+2. validtor 服务
+3. 错误信息 获取与提示 
+4. 错误信息展示位置，与展示样式；
+
+* 利用Control status CSS classes 去标记输入框 结合文档通过css 去控制；
+
+```css
+/**
+*.ng-valid
+.ng-invalid
+.ng-pending
+.ng-pristine
+.ng-dirty
+.ng-untouched
+.ng-touched
+*/
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+```
+
+* 利用 Toast 去显示信息的具体内容；
+
+```ts
+import { ToastController } from 'ionic-angular';
+
+export class MyPage {
+  constructor(public toastCtrl: ToastController) {
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'User was added successfully',
+      duration: 3000
+    });
+    toast.present();
+  }
+}
+```
+
+5. 学会去调试表单根据用户输入之后的反应
+
+```html
+<p>Form value: {{ heroForm.value | json }}</p>
+<p>Form status: {{ heroForm.status | json }}</p>
+
+<p>Street value: {{ heroForm.get('address.street').value}}</p>
+```
+
+```ts
+// heroForm.get('address.street') 可以再ts 中 利用 get别名进行简化
+get street = () => {
+  return this.heroForm.get('assdress.street')
+}
+
+// <p>Street value: {{ street.value}}</p>
+
+```
+
+
+
 
 
 ```mermaid
