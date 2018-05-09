@@ -19,19 +19,26 @@
 
         <form [formGroup]="form" (ngSubmit)="processForm()">
           <div ion-item >
-             <ion-icon name="leaf" item-start></ion-icon>
+             <ion-icon name="leaf" item-start [style.color]="formErrors.email ? 'red': 'green'"></ion-icon>
              <ion-input  type="text" placeholder= " email" formControlName="email" >
              </ion-input>
           </div>
 
           <div ion-item>
-              <ion-icon name="rose" item-start></ion-icon>
+              <ion-icon name="rose" item-start [style.color]="formErrors.password ? 'red' : 'green' "></ion-icon>
               <ion-input type="password" placeholder="password" formControlName="password" ></ion-input>
           </div>
 
-          <button ion-button full color="dark" type="submit">log form</button>
           <button ion-button full color="primary" class="margin-top" (click)="login()" > Login </button>
         </form>
+
+        <div *ngIf='formErrors.email' ion-item>
+          {{formErrors.email}}
+        </div>
+
+        <div *ngIf='formErrors.password' ion-item>
+            {{formErrors.password}}
+        </div>
 
 
     </ion-list>

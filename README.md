@@ -282,6 +282,37 @@ export class MyPage {
 }
 ```
 
+* 具体显示错误信息的位置
+
+```html
+    <ion-list inset>
+
+        <form [formGroup]="form" (ngSubmit)="processForm()">
+          <div ion-item >
+             <ion-icon name="leaf" item-start [style.color]="formErrors.email ? 'red': 'green'"></ion-icon>
+             <ion-input  type="text" placeholder= " email" formControlName="email" >
+             </ion-input>
+          </div>
+
+          <div ion-item>
+              <ion-icon name="rose" item-start [style.color]="formErrors.password ? 'red' : 'green' "></ion-icon>
+              <ion-input type="password" placeholder="password" formControlName="password" ></ion-input>
+          </div>
+
+          <button ion-button full color="primary" class="margin-top" (click)="login()" > Login </button>
+        </form>
+
+        <div *ngIf='formErrors.email' ion-item>
+          {{formErrors.email}}
+        </div>
+
+        <div *ngIf='formErrors.password' ion-item>
+            {{formErrors.password}}
+        </div>
+    </ion-list>
+
+```
+
 5. 什么时候去验证？是在input 失去焦点  还是再input 的值改变的时候（用户正在输入的时候）
 > 答案肯定是在用户边输入，边验证，边提示；
 

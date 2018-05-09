@@ -38,7 +38,9 @@ export class LoginPage {
     },
     password: {
       required: '请输入密码',
-      minLength: '密码至少六位'
+      minLength: '密码至少六位',
+      minlength:'密码至少七位'
+
     }
   }
 
@@ -60,8 +62,8 @@ export class LoginPage {
 
     this.form.valueChanges.subscribe(
       (data) => {
-        console.log(data);
-        // this.validatorForm();
+        // console.log(data);
+        this.validatorForm();
       }
     )
   }
@@ -94,8 +96,11 @@ export class LoginPage {
           * }
           *
           */
-         for (let error in input.errors as ValidationErrors) {
+         for (let error in input.errors as ValidationErrors | null) {
            // assign that type of error message to a variable
+            this.formErrors[field] = this.validationMessages[field][error];
+            console.log(error);
+            console.log(input.errors);
 
          }
       }
