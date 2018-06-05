@@ -2,7 +2,7 @@
 
 
 
-## Course 2 User Authentication Login and Signup
+##  User Authentication Login and Signup
 
 >  关键之处有两点： 
 
